@@ -1,0 +1,1 @@
+export const problem = ['?', '오동근', '@%@^&*',' ', 'a   ', '      b           ','hello world!  ', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
