@@ -1,9 +1,9 @@
 export function mergeSort(strings: string[], left: number, right: number): string[] {
-    if (!validate(strings, left, right)) {
-        return strings;
+    if (left >= right) {
+        return [strings[left]];
     }
 
-    const mid = Math.floor(left + (right - left) / 2);
+    const mid = Math.floor((right + left) / 2);
     mergeSort(strings, left, mid);
     mergeSort(strings, mid + 1, right);
 
@@ -12,57 +12,29 @@ export function mergeSort(strings: string[], left: number, right: number): strin
     return strings;
 }
 
-function validate(strings: string[], left: number, right: number): boolean {
-    if (strings.length <= 1) {
-        return false
-    }
-
-    return left < right;
-}
-
 function merge(strings: string[], left: number, mid: number, right: number): void {
-    const leftArrSize = mid - left + 1;
-    const rightArrSize = right - mid;
-    const leftArr = new Array(leftArrSize);
-    const rightArr = new Array(rightArrSize);
+    let leftCursor = left;
+    let rightCursor = mid + 1;
+    const newArr: string[] = [];
+    let newArrCursor = left;
 
-    copyIntoDividedArray(strings, leftArr, leftArrSize, left);
-    copyIntoDividedArray(strings, rightArr, rightArrSize, mid + 1);
+    while (leftCursor <= mid && rightCursor <= right) {
+        if (strings[leftCursor] < strings[rightCursor]) {
+            newArr[newArrCursor++] = strings[leftCursor++];
 
-    compareAndMerge()
-
-
-    while (i < leftArrSize) {
-        strings[k] = leftArr[i];
-        i++;
-        k++;
-    }
-    while (j < rightArrSize) {
-        strings[k] = rightArr[j];
-        j++;
-        k++;
-    }
-}
-
-function copyIntoDividedArray(strings: string[], newArr: string[], newArrSize: number, startIndex: number) {
-    for (let i = 0; i < newArrSize; i++) {
-        newArr[i] = strings[startIndex + i];
-    }
-}
-
-function compareAndMerge(left: number, leftArrSize: number, rightArrSize: number, ) {
-    let i = 0;
-    let j = 0;
-    let k = left;
-
-    while (i < leftArrSize && j < rightArrSize) {
-        if (leftArr[i] <= rightArr[j]) {
-            strings[k] = leftArr[i];
-            i++;
         } else {
-            strings[k] = rightArr[j];
-            j++;
+            newArr[newArrCursor++] = strings[rightCursor++];
         }
-        k++;
+    }
+
+    while (leftCursor <= mid) {
+        newArr[newArrCursor++] = strings[leftCursor++];
+    }
+    while (rightCursor <= right) {
+        newArr[newArrCursor++] = strings[rightCursor++];
+    }
+
+    for (let i = left; i <= right; i++) {
+        strings[i] = newArr[i];
     }
 }
