@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const problem_1 = require("./problem");
+const mergeSort_1 = require("./mergeSort");
 function f(strings) {
     const trimmedStrings = trimStrings(strings);
     const titleCaseStrings = makeTitleCases(trimmedStrings);
-    return (titleCaseStrings.sort());
+    return (0, mergeSort_1.mergeSort)(titleCaseStrings, 0, titleCaseStrings.length - 1);
+    // return (titleCaseStrings.sort());
 }
 function trimStrings(strings) {
     return strings.map(s => s.trim());
@@ -20,7 +22,7 @@ function makeTitleCase(s) {
     }
     catch (e) {
         if (e instanceof TypeError) {
-            console.error(s + "Cannot be Title Case Word");
+            console.error("Cannot change into Title Case Word : " + s);
         }
         else {
             throw Error("Unknown Error your string is : " + s);

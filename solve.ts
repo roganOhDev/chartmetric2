@@ -1,10 +1,12 @@
 import {problem} from './problem';
+import {mergeSort} from './mergeSort';
 
 function f(strings: string[]): string[] {
     const trimmedStrings = trimStrings(strings);
     const titleCaseStrings = makeTitleCases(trimmedStrings);
 
-    return (titleCaseStrings.sort());
+    return mergeSort(titleCaseStrings, 0, titleCaseStrings.length - 1);
+    // return (titleCaseStrings.sort());
 }
 
 function trimStrings(strings: string[]): string[] {
@@ -24,7 +26,7 @@ function makeTitleCase(s: string): string {
 
     } catch (e) {
         if (e instanceof TypeError) {
-             console.error(s + "Cannot be a Title Case Word");
+            console.error("Cannot change into Title Case Word : " + s);
         } else {
             throw Error("Unknown Error your string is : " + s);
         }
