@@ -1,8 +1,5 @@
 export function mergeSort(strings: string[], left: number, right: number): string[] {
-    if (strings.length <= 1) {
-        return strings;
-    }
-    if (left >= right) {
+    if (!validate(strings, left, right)) {
         return strings;
     }
 
@@ -15,19 +12,45 @@ export function mergeSort(strings: string[], left: number, right: number): strin
     return strings;
 }
 
+function validate(strings: string[], left: number, right: number): boolean {
+    if (strings.length <= 1) {
+        return false
+    }
+
+    return left < right;
+}
+
 function merge(strings: string[], left: number, mid: number, right: number): void {
     const leftArrSize = mid - left + 1;
     const rightArrSize = right - mid;
     const leftArr = new Array(leftArrSize);
     const rightArr = new Array(rightArrSize);
 
-    for (let i = 0; i < leftArrSize; i++) {
-        leftArr[i] = strings[left + i];
-    }
-    for (let i = 0; i < rightArrSize; i++) {
-        rightArr[i] = strings[mid + 1 + i];
-    }
+    copyIntoDividedArray(strings, leftArr, leftArrSize, left);
+    copyIntoDividedArray(strings, rightArr, rightArrSize, mid + 1);
 
+    compareAndMerge()
+
+
+    while (i < leftArrSize) {
+        strings[k] = leftArr[i];
+        i++;
+        k++;
+    }
+    while (j < rightArrSize) {
+        strings[k] = rightArr[j];
+        j++;
+        k++;
+    }
+}
+
+function copyIntoDividedArray(strings: string[], newArr: string[], newArrSize: number, startIndex: number) {
+    for (let i = 0; i < newArrSize; i++) {
+        newArr[i] = strings[startIndex + i];
+    }
+}
+
+function compareAndMerge(left: number, leftArrSize: number, rightArrSize: number, ) {
     let i = 0;
     let j = 0;
     let k = left;
@@ -40,17 +63,6 @@ function merge(strings: string[], left: number, mid: number, right: number): voi
             strings[k] = rightArr[j];
             j++;
         }
-        k++;
-    }
-
-    while (i < leftArrSize) {
-        strings[k] = leftArr[i];
-        i++;
-        k++;
-    }
-    while (j < rightArrSize) {
-        strings[k] = rightArr[j];
-        j++;
         k++;
     }
 }
