@@ -22,7 +22,7 @@ function makeTitleCase(s) {
     }
     catch (e) {
         if (e instanceof TypeError) {
-            console.error("Cannot change into Title Case Word : " + s);
+            throw Error("Cannot change into Title Case Word : " + s);
         }
         else {
             throw Error("Unknown Error your string is : " + s);

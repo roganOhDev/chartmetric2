@@ -13,28 +13,39 @@ export function mergeSort(strings: string[], left: number, right: number): strin
 }
 
 function merge(strings: string[], left: number, mid: number, right: number): void {
-    let leftCursor = left;
-    let rightCursor = mid + 1;
     const newArr: string[] = [];
-    let newArrCursor = left;
+
+    const {leftCursor, rightCursor} = compareAndMerge(strings, left, mid, right, newArr)
+
+    mergeRemainedElements(strings, right, leftCursor, mid, rightCursor, newArr);
+
+    for (let i = left; i <= right; i++) {
+        strings[i] = newArr[i - left];
+    }
+}
+
+function compareAndMerge(strings: string[], leftCursor: number, mid: number, right: number, newArr: string[]): {
+    leftCursor: number,
+    rightCursor: number
+} {
+    let rightCursor = mid + 1;
 
     while (leftCursor <= mid && rightCursor <= right) {
         if (strings[leftCursor] < strings[rightCursor]) {
-            newArr[newArrCursor++] = strings[leftCursor++];
+            newArr.push(strings[leftCursor++]);
 
         } else {
-            newArr[newArrCursor++] = strings[rightCursor++];
+            newArr.push(strings[rightCursor++]);
         }
     }
+    return {leftCursor, rightCursor};
+}
 
+function mergeRemainedElements(strings: string[], right: number, leftCursor: number, mid: number, rightCursor: number, newArr: string[]): void {
     while (leftCursor <= mid) {
-        newArr[newArrCursor++] = strings[leftCursor++];
+        newArr.push(strings[leftCursor++]);
     }
     while (rightCursor <= right) {
-        newArr[newArrCursor++] = strings[rightCursor++];
-    }
-
-    for (let i = left; i <= right; i++) {
-        strings[i] = newArr[i];
+        newArr.push(strings[rightCursor++]);
     }
 }
