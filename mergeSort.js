@@ -15,7 +15,7 @@ exports.mergeSort = mergeSort;
 function merge(strings, left, mid, right) {
     const newArr = [];
     const { leftCursor, rightCursor } = compareAndMerge(strings, left, mid, right, newArr);
-    mergeLeftElements(leftCursor, mid, newArr, strings, rightCursor, right);
+    mergeRemainedElements(strings, right, leftCursor, mid, rightCursor, newArr);
     for (let i = left; i <= right; i++) {
         strings[i] = newArr[i - left];
     }
@@ -32,7 +32,7 @@ function compareAndMerge(strings, leftCursor, mid, right, newArr) {
     }
     return { leftCursor, rightCursor };
 }
-function mergeLeftElements(leftCursor, mid, newArr, strings, rightCursor, right) {
+function mergeRemainedElements(strings, right, leftCursor, mid, rightCursor, newArr) {
     while (leftCursor <= mid) {
         newArr.push(strings[leftCursor++]);
     }
@@ -40,3 +40,4 @@ function mergeLeftElements(leftCursor, mid, newArr, strings, rightCursor, right)
         newArr.push(strings[rightCursor++]);
     }
 }
+
