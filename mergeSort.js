@@ -40,4 +40,3 @@ function mergeRemainedElements(strings, right, leftCursor, mid, rightCursor, new
         newArr.push(strings[rightCursor++]);
     }
 }
-
