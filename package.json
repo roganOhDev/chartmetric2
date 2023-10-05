@@ -5,6 +5,6 @@
 
   "scripts": {
     "build": "tsc",
-    "run": "npm run build && ts-node solve.ts"
+    "start": "npm run build && ts-node solve.ts"
   }
 }
