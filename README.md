@@ -6,12 +6,6 @@ I solve this question with TypeScript. Please run solve.ts
 
 ## Run
 
-* install  
-```
-npm install
-```
-
-* run
 ```
 npm run start
 ```
