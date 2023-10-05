@@ -16,7 +16,7 @@ npm install
 npm run start
 ```
 
-## Question
+## Change Question
 You can change question in solve.ts
 
 Please do not change name of variable.
